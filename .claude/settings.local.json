@@ -39,7 +39,8 @@
       "WebFetch(domain:siliconflow.cn)",
       "Bash(cp:*)",
       "Bash(npx react-native start:*)",
-      "Bash(git remote set-url:*)"
+      "Bash(git remote set-url:*)",
+      "Bash(git pull:*)"
     ],
     "deny": [],
     "ask": []
