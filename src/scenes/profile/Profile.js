@@ -104,7 +104,7 @@ export default function Profile() {
 
   return (
     <ScreenTemplate>
-      <View style={styles.main}>
+      <View style={[styles.main, styles.whiteBackground]}>
         <View style={styles.avatar}>
           <Avatar
             size="large"
@@ -113,55 +113,60 @@ export default function Profile() {
           />
         </View>
         <View style={styles.infoContainer}>
-          <Text style={[styles.fieldLabel, { color: colorScheme.text }]}>Name:</Text>
+          <Text style={[styles.fieldLabel, { color: colorScheme.text }]}>姓名:</Text>
           <BlurView intensity={55} tint="regular" style={styles.textBackground}>
             <Text style={[styles.fieldValue, styles.timesFont, { color: colorScheme.text }]}>{userData.full_name || userData.fullName}</Text>
           </BlurView>
-          <Text style={[styles.fieldLabel, { color: colorScheme.text }]}>Mail:</Text>
+          <Text style={[styles.fieldLabel, { color: colorScheme.text }]}>邮箱:</Text>
           <BlurView intensity={55} tint="regular" style={styles.textBackground}>
             <Text style={[styles.fieldValue, styles.timesFont, { color: colorScheme.text }]}>{userData.email}</Text>
           </BlurView>
         </View>
-        <Button
-          label="Edit"
-          color="#FFB366"
-          style3D
-          compact
-          onPress={goDetail}
-        />
-        <Button
-          label="Open Modal"
-          color="#FF8C42"
-          style3D
-          compact
-          onPress={() => {
-            navigation.navigate('ModalStacks', {
-              screen: 'Post',
-              params: {
-                data: userData,
-                from: 'Profile screen',
-              },
-            })
-          }}
-        />
-        <Button
-          label="Delete account"
-          color="#E65100"
-          style3D
-          compact
-          onPress={showDialog}
-        />
+        <View style={styles.buttonsContainer}>
+          <Button
+            label="编辑"
+            color="#FFB366"
+            style3D
+            compact
+            onPress={goDetail}
+            style={styles.squareButton}
+          />
+          <Button
+            label="打开弹窗"
+            color="#FF8C42"
+            style3D
+            compact
+            onPress={() => {
+              navigation.navigate('ModalStacks', {
+                screen: 'Post',
+                params: {
+                  data: userData,
+                  from: 'Profile screen',
+                },
+              })
+            }}
+            style={styles.squareButton}
+          />
+          <Button
+            label="删除账户"
+            color="#E65100"
+            style3D
+            compact
+            onPress={showDialog}
+            style={styles.squareButton}
+          />
+        </View>
         <View style={styles.footerView}>
-          <Text onPress={onSignOutPress} style={styles.footerLink}>Sign out</Text>
+          <Text onPress={onSignOutPress} style={styles.footerLink}>退出登录</Text>
         </View>
       </View>
       <Dialog.Container visible={visible}>
-        <Dialog.Title>Delete account</Dialog.Title>
+        <Dialog.Title>删除账户</Dialog.Title>
         <Dialog.Description>
-          Do you want to delete this account? You cannot undo this action.
+          您确定要删除此账户吗？此操作无法撤销。
         </Dialog.Description>
-        <Dialog.Button label="Cancel" onPress={handleCancel} />
-        <Dialog.Button label="Delete" onPress={accountDelete} />
+        <Dialog.Button label="取消" onPress={handleCancel} />
+        <Dialog.Button label="删除" onPress={accountDelete} />
       </Dialog.Container>
       <Spinner
         visible={spinner}
@@ -221,5 +226,27 @@ const styles = StyleSheet.create({
     color: '#000000',
     fontWeight: 'bold',
     fontSize: fontSize.large,
+  },
+  buttonsContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    marginHorizontal: 20,
+    marginVertical: 20,
+  },
+  squareButton: {
+    width: 80,
+    height: 80,
+    borderRadius: 12,
+    marginHorizontal: 5,
+    marginVertical: 0,
+    marginTop: 0,
+    marginLeft: 0,
+    marginRight: 0,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  whiteBackground: {
+    backgroundColor: colors.white,
   },
 })

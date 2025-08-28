@@ -184,14 +184,8 @@ const styles = StyleSheet.create({
     padding: 15,
     marginBottom: 10,
     borderRadius: 12,
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.1,
-    shadowRadius: 3.84,
-    elevation: 3,
+    borderWidth: 1,
+    borderColor: colors.black,
   },
   userInfo: {
     flexDirection: 'row',

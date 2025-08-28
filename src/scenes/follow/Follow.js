@@ -6,7 +6,6 @@ import { colors, fontSize } from 'theme'
 import { useNavigation } from '@react-navigation/native'
 import ScreenTemplate from '../../components/ScreenTemplate'
 import Button from '../../components/Button'
-import DigitalAvatar from '../../components/DigitalAvatar'
 import digitalAssistant from '../../services/assistant/DigitalAssistant'
 import { ColorSchemeContext } from '../../context/ColorSchemeContext'
 import { UserDataContext } from '../../context/UserDataContext'
@@ -57,18 +56,14 @@ export default function Follow() {
           }]}
           />
 
-          <DigitalAvatar
-            style={styles.avatar}
-            videoStyle={styles.avatarVideo}
-            onMessage={handleMessage}
-            enableInteraction
-            textOnlyMode
-          />
+          <View style={[styles.avatarPlaceholder, { backgroundColor: colorScheme.inputBackground }]}>
+            <Text style={[styles.avatarPlaceholderText, { color: colorScheme.text }]}>🤖</Text>
+          </View>
           <Text style={[styles.welcomeText, { color: colorScheme.text }]}>
             你好！我是嘎巴龙 🐉
           </Text>
           <Text style={[styles.avatarName, { color: colorScheme.text }]}>
-            点击我开始语音对话，或在下方输入文字
+            在下方输入文字开始对话
           </Text>
 
         </View>
@@ -143,16 +138,16 @@ const styles = StyleSheet.create({
     paddingVertical: 40,
     position: 'relative',
   },
-  avatar: {
+  avatarPlaceholder: {
     width: 200,
     height: 260,
     borderRadius: 20,
-    overflow: 'hidden',
     marginBottom: 20,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
-  avatarVideo: {
-    width: '100%',
-    height: '100%',
+  avatarPlaceholderText: {
+    fontSize: 80,
   },
   welcomeText: {
     fontSize: fontSize.large,
@@ -195,7 +190,7 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-end',
   },
   assistantMessage: {
-    backgroundColor: 'rgba(100, 100, 100, 0.1)',
+    backgroundColor: colors.offWhite,
     alignSelf: 'flex-start',
   },
   messageText: {

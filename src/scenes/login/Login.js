@@ -33,11 +33,16 @@ export default function Login() {
   const { setLoggedIn, setChecked } = useContext(AppContext)
   const isDark = scheme === 'dark'
   const colorScheme = {
-    text: isDark ? colors.white : colors.primaryText,
+    text: isDark ? '#ffffff' : '#000000',
   }
 
   const onFooterLinkPress = () => {
     navigation.navigate('Registration')
+  }
+
+  const handleGuestMode = () => {
+    console.log('Guest mode selected')
+    navigation.navigate('Registration', { guestMode: true })
   }
 
   useEffect(() => {
@@ -129,10 +134,10 @@ export default function Login() {
       console.error('Login error:', error.message)
       setSpinner(false)
 
-      let errorMessage = 'Login failed. Please try again.'
+      let errorMessage = '登录失败，请重试'
       switch (error.message) {
         case 'Invalid login credentials':
-          errorMessage = 'Invalid email or password. Please try again.'
+          errorMessage = '邮箱或密码无效，请重试'
           break
         case 'Email not confirmed':
           // Show verification screen for unconfirmed email
@@ -140,10 +145,10 @@ export default function Login() {
           setShowVerification(true)
           return
         case 'Too many requests':
-          errorMessage = 'Too many failed login attempts. Please try again later.'
+          errorMessage = '登录尝试次数过多，请稍后重试'
           break
         default:
-          errorMessage = error.message || 'An unexpected error occurred.'
+          errorMessage = error.message || '发生了意外错误'
       }
 
       console.error('Login error message:', errorMessage)
@@ -166,7 +171,7 @@ export default function Login() {
         />
         <Spinner
           visible={spinner}
-          textStyle={{ color: colors.white }}
+          textStyle={{ color: '#ffffff' }}
           overlayColor="rgba(0,0,0,0.5)"
         />
       </ScreenTemplate>
@@ -179,9 +184,12 @@ export default function Login() {
         style={styles.main}
         keyboardShouldPersistTaps="always"
       >
-        <Logo />
+        <View style={styles.titleContainer}>
+          <Text style={styles.titleText}>欢迎来到幼教世界！</Text>
+          <Text style={styles.subtitleText}>请输入你的信息开始学习之旅</Text>
+        </View>
         <TextInputBox
-          placeholder="E-mail"
+          placeholder="邮箱地址"
           onChangeText={(text) => setEmail(text)}
           autoCapitalize="none"
           value={email}
@@ -190,29 +198,31 @@ export default function Login() {
         {!useOtpLogin && (
           <TextInputBox
             secureTextEntry
-            placeholder="Password"
+            placeholder="密码"
             onChangeText={(text) => setPassword(text)}
             value={password}
             autoCapitalize="none"
           />
         )}
         <Button
-          label={useOtpLogin ? '发送验证码' : '登录'}
-          color={colors.primary}
+          label={useOtpLogin ? '发送验证码' : '开始学习'}
           onPress={() => onLoginPress()}
         />
         <Button
           label={useOtpLogin ? '使用密码登录' : '使用验证码登录'}
-          color={colors.blueLight}
           onPress={() => setUseOtpLogin(!useOtpLogin)}
         />
+        <Button
+          label="游客模式"
+          onPress={handleGuestMode}
+        />
         <View style={styles.footerView}>
-          <Text style={[styles.footerText, { color: colorScheme.text }]}>Don't have an account? <Text onPress={onFooterLinkPress} style={styles.footerLink}>Sign up</Text></Text>
+          <Text style={[styles.footerText, { color: colorScheme.text }]}>还没有账号？ <Text onPress={onFooterLinkPress} style={styles.footerLink}>注册账号</Text></Text>
         </View>
       </KeyboardAwareScrollView>
       <Spinner
         visible={spinner}
-        textStyle={{ color: colors.white }}
+        textStyle={{ color: '#ffffff' }}
         overlayColor="rgba(0,0,0,0.5)"
       />
     </ScreenTemplate>
@@ -224,6 +234,22 @@ const styles = StyleSheet.create({
     flex: 1,
     width: '100%',
   },
+  titleContainer: {
+    alignItems: 'center',
+    marginBottom: 30,
+    marginTop: 20,
+  },
+  titleText: {
+    fontSize: 28,
+    fontWeight: 'bold',
+    color: '#000000',
+    marginBottom: 10,
+  },
+  subtitleText: {
+    fontSize: 16,
+    color: '#000000',
+    textAlign: 'center',
+  },
   footerView: {
     flex: 1,
     alignItems: 'center',
@@ -234,7 +260,7 @@ const styles = StyleSheet.create({
     fontSize: fontSize.large,
   },
   footerLink: {
-    color: colors.blueLight,
+    color: '#000000',
     fontWeight: 'bold',
     fontSize: fontSize.large,
   },

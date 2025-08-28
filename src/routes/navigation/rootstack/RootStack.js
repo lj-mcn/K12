@@ -7,7 +7,8 @@ import TabNavigator from '../tabs/Tabs'
 import { ModalStacks } from '../stacks/ModalStacks/ModalStacks'
 import VideoPlayer from '../../../scenes/video'
 import MusicSettings from '../../../scenes/musicSettings'
-import BlindBoxVideo from '../../../scenes/blindBox'
+import Login from '../../../scenes/login'
+import Registration from '../../../scenes/registration'
 import { supabase } from '../../../../lib/supabase'
 import { UserDataContext } from '../../../context/UserDataContext'
 import { useAppFlow } from '../../../context/AppFlowContext'
@@ -26,7 +27,7 @@ Notifications.setNotificationHandler({
 export default function RootStack() {
   const { userData } = useContext(UserDataContext)
   const {
-    videoWatched, musicSettingsCompleted, musicEnabled, markVideoWatched, markMusicSettingsCompleted,
+    videoWatched, musicSettingsCompleted, musicEnabled, loginCompleted, markVideoWatched, markMusicSettingsCompleted,
   } = useAppFlow()
   const isIos = Platform.OS === 'ios'
 
@@ -88,6 +89,17 @@ export default function RootStack() {
             musicEnabled,
           }}
         />
+      ) : !loginCompleted ? (
+        <>
+          <Stack.Screen
+            name="Login"
+            component={Login}
+          />
+          <Stack.Screen
+            name="Registration"
+            component={Registration}
+          />
+        </>
       ) : (
         <>
           <Stack.Screen
@@ -107,10 +119,6 @@ export default function RootStack() {
             <Stack.Screen
               name="ModalStacks"
               component={ModalStacks}
-            />
-            <Stack.Screen
-              name="BlindBoxVideo"
-              component={BlindBoxVideo}
             />
             <Stack.Screen
               name="VillageVideo"

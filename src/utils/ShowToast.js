@@ -28,7 +28,7 @@ const toastConfig = {
   success: (props) => {
     const { isDark } = props.props
     const styles = {
-      backgroundColor: isDark ? colors.darkInput : colors.white,
+      backgroundColor: isDark ? colors.darkInput : colors.offWhite,
       text1Color: isDark ? colors.white : colors.black,
       text2Color: isDark ? colors.lightyellow : colors.darkPurple,
     }

@@ -22,7 +22,7 @@ export default function ErrorScreen() {
         style={styles.animation}
         autoPlay
       />
-      <Text style={[styles.text, { color: colorScheme.text }]}>Network Error</Text>
+      <Text style={[styles.text, { color: colorScheme.text }]}>网络错误</Text>
     </View>
   )
 }

@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { StyleSheet, SafeAreaView, ImageBackground } from 'react-native'
+import { StyleSheet, SafeAreaView, View } from 'react-native'
 import { StatusBar } from 'expo-status-bar'
 import { colors } from '../theme'
 import { ColorSchemeContext } from '../context/ColorSchemeContext'
@@ -23,13 +23,9 @@ export default function ScreenTemplate(props) {
   return (
     <SafeAreaView style={container}>
       <StatusBar style="light" />
-      <ImageBackground
-        source={require('../../assets/images/background.png')}
-        style={styles.backgroundImage}
-        resizeMode="cover"
-      >
+      <View style={styles.backgroundView}>
         {props.children}
-      </ImageBackground>
+      </View>
     </SafeAreaView>
   )
 }
@@ -42,9 +38,10 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: colors.black,
   },
-  backgroundImage: {
+  backgroundView: {
     flex: 1,
     width: '100%',
     height: '100%',
+    backgroundColor: colors.offWhite,
   },
 })

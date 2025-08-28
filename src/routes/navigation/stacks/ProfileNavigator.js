@@ -20,6 +20,7 @@ export const ProfileNavigator = () => {
           name="Profile"
           component={Profile}
           options={({ navigation }) => ({
+            title: '个人中心',
             headerBackground: scheme === 'dark' ? null : () => <HeaderStyle />,
           })}
         />

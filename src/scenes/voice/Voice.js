@@ -4,7 +4,6 @@ import {
 } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 import ScreenTemplate from '../../components/ScreenTemplate'
-import DigitalAvatar from '../../components/DigitalAvatar'
 // import ConfigTester from '../../components/ConfigTester'
 import digitalAssistant from '../../services/assistant/DigitalAssistant'
 import { colors, fontSize } from '../../theme'
@@ -245,12 +244,9 @@ export default function Voice() {
         {/* 数字人区域 */}
         <View style={styles.avatarContainer}>
           {/* 移除旧的背景装饰，使用沉浸式效果 */}
-          <DigitalAvatar
-            style={styles.avatar}
-            videoStyle={styles.avatarVideo}
-            onMessage={handleMessage}
-            enableInteraction={chatStarted}
-          />
+          <View style={[styles.avatarPlaceholder]}>
+            <Text style={styles.avatarPlaceholderText}>🤖</Text>
+          </View>
 
         </View>
 
@@ -409,14 +405,17 @@ const styles = StyleSheet.create({
     position: 'relative',
     marginBottom: 30,
   },
-  avatar: {
-    marginBottom: 15,
-    // 移除阴影，由DigitalAvatar组件内部处理
-  },
-  avatarVideo: {
-    width: 200, // 统一尺寸
+  avatarPlaceholder: {
+    width: 200,
     height: 300,
-    borderRadius: 15, // 统一圆角
+    borderRadius: 15,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: colors.offWhite,
+    marginBottom: 15,
+  },
+  avatarPlaceholderText: {
+    fontSize: 80,
   },
   avatarStatus: {
     fontSize: fontSize.middle,
@@ -442,20 +441,14 @@ const styles = StyleSheet.create({
     width: 120,
     height: 120,
     borderRadius: 60,
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 4,
-    },
-    shadowOpacity: 0.3,
-    shadowRadius: 4.65,
-    elevation: 8,
+    borderWidth: 2,
+    borderColor: colors.black,
   },
   voiceButtonActive: {
-    backgroundColor: '#ff4757',
+    backgroundColor: colors.offWhite,
   },
   voiceButtonInactive: {
-    backgroundColor: 'transparent',
+    backgroundColor: colors.offWhite,
   },
   voiceButtonIcon: {
     fontSize: 32,
@@ -547,30 +540,16 @@ const styles = StyleSheet.create({
     height: 160,
     borderRadius: 80,
     marginBottom: 10,
-    shadowOffset: { width: 0, height: 8 },
-    shadowOpacity: 0.5,
-    shadowRadius: 12,
-    elevation: 15,
   },
   smartButtonActive: {
     backgroundColor: '#f5f5dc',
-    shadowColor: '#d2b48c',
     borderWidth: 1,
     borderColor: '#e6e6fa',
-    shadowOffset: { width: 0, height: 8 },
-    shadowOpacity: 0.5,
-    shadowRadius: 12,
-    elevation: 15,
   },
   smartButtonInactive: {
     backgroundColor: '#f5f5dc',
-    shadowColor: '#d2b48c',
     borderWidth: 1,
     borderColor: '#e6e6fa',
-    shadowOffset: { width: 0, height: 8 },
-    shadowOpacity: 0.5,
-    shadowRadius: 12,
-    elevation: 15,
   },
   smartButtonIcon: {
     fontSize: 28,
@@ -592,18 +571,12 @@ const styles = StyleSheet.create({
     height: 100,
     borderRadius: 50,
     marginTop: 20,
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.3,
-    shadowRadius: 8,
-    elevation: 10,
   },
   manualMicButtonActive: {
-    backgroundColor: '#ff4757', // 红色表示录音中
-    shadowColor: '#ff4757',
+    backgroundColor: colors.offWhite, // 红色表示录音中
   },
   manualMicButtonInactive: {
-    backgroundColor: '#3742fa', // 蓝色表示可录音
-    shadowColor: '#3742fa',
+    backgroundColor: colors.offWhite, // 蓝色表示可录音
   },
   manualMicButtonIcon: {
     fontSize: 28,
@@ -624,20 +597,14 @@ const styles = StyleSheet.create({
     height: 180,
     borderRadius: 90,
     marginBottom: 20,
-    shadowOffset: { width: 0, height: 10 },
-    shadowOpacity: 0.6,
-    shadowRadius: 15,
-    elevation: 20,
   },
   pttButtonActive: {
-    backgroundColor: '#ff4757', // 录音时红色
-    shadowColor: '#ff4757',
+    backgroundColor: colors.offWhite, // 录音时红色
     borderWidth: 3,
-    borderColor: '#ffffff',
+    borderColor: colors.black,
   },
   pttButtonInactive: {
-    backgroundColor: '#3742fa', // 待机时蓝色
-    shadowColor: '#3742fa',
+    backgroundColor: colors.offWhite, // 待机时蓝色
     borderWidth: 2,
     borderColor: '#e6e6fa',
   },
@@ -658,16 +625,16 @@ const styles = StyleSheet.create({
     textShadowRadius: 2,
   },
   pttButtonTextActive: {
-    color: '#ffffff',
+    color: colors.black,
     textShadowColor: 'rgba(255,71,87,0.5)',
   },
   pttButtonTextInactive: {
-    color: '#ffffff',
+    color: colors.black,
     textShadowColor: 'rgba(55,66,250,0.5)',
   },
   pttButtonHint: {
     fontSize: 12,
-    color: '#ffffff',
+    color: colors.black,
     textAlign: 'center',
     opacity: 0.9,
     fontWeight: '500',

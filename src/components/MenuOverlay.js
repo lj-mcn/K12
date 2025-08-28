@@ -7,23 +7,22 @@ import { colors, fontSize } from '../theme'
 const { width, height } = Dimensions.get('window')
 
 const MenuOverlay = ({
-  visible, onClose, isDark, onBackToVillage, onOpenBlindBox,
+  visible, onClose, isDark, onBackToVillage,
 }) => {
   const colorScheme = {
     text: isDark ? colors.white : colors.primaryText,
     background: isDark ? 'rgba(0,0,0,0.9)' : 'rgba(0,0,0,0.7)',
-    menuBackground: isDark ? '#2a2a2a' : colors.white,
+    menuBackground: isDark ? '#2a2a2a' : colors.offWhite,
     buttonBackground: isDark ? '#444' : '#f8f9fa',
   }
 
   const menuItems = [
     { id: 1, title: '🏠 回到垃圾村', action: 'backToVillage' },
-    { id: 2, title: '📦 开个盲盒', action: 'openBlindBox' },
-    { id: 3, title: '💬 来聊天吧', action: 'goToChat' },
-    { id: 4, title: '👗 打扮一下', action: 'dressUp' },
-    { id: 5, title: '👨‍👩‍👧‍👦 村民家族', action: 'villagerFamily' },
-    { id: 6, title: '🐔 养鸡场的终极对决', action: 'chickenBattle' },
-    { id: 7, title: '⚙️ 我的设置', action: 'settings' },
+    { id: 2, title: '💬 来聊天吧', action: 'goToChat' },
+    { id: 3, title: '👗 打扮一下', action: 'dressUp' },
+    { id: 4, title: '👨‍👩‍👧‍👦 村民家族', action: 'villagerFamily' },
+    { id: 5, title: '🐔 养鸡场的终极对决', action: 'chickenBattle' },
+    { id: 6, title: '⚙️ 我的设置', action: 'settings' },
   ]
 
   const handleMenuItemPress = (action) => {
@@ -34,12 +33,6 @@ const MenuOverlay = ({
         // 重新开始流程：提示弹窗 → 视频 → 主页
         if (onBackToVillage) {
           onBackToVillage()
-        }
-        break
-      case 'openBlindBox':
-        // 打开盲盒功能
-        if (onOpenBlindBox) {
-          onOpenBlindBox()
         }
         break
       case 'goToChat':
@@ -130,14 +123,8 @@ const styles = StyleSheet.create({
     width: width * 0.85,
     maxWidth: 400,
     borderRadius: 20,
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 10,
-    },
-    shadowOpacity: 0.3,
-    shadowRadius: 20,
-    elevation: 10,
+    borderWidth: 2,
+    borderColor: colors.black,
   },
   menuHeader: {
     flexDirection: 'row',
@@ -155,7 +142,7 @@ const styles = StyleSheet.create({
     width: 30,
     height: 30,
     borderRadius: 15,
-    backgroundColor: 'rgba(0,0,0,0.1)',
+    backgroundColor: colors.offWhite,
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -176,14 +163,8 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
     marginVertical: 3,
     borderRadius: 12,
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 1,
-    },
-    shadowOpacity: 0.1,
-    shadowRadius: 2,
-    elevation: 2,
+    borderWidth: 1,
+    borderColor: colors.black,
   },
   lastMenuItem: {
     marginBottom: 10,

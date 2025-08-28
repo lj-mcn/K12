@@ -1,11 +1,15 @@
 import React from 'react'
-import { ImageBackground } from 'react-native'
+import { View } from 'react-native'
+import { colors } from '../../../../theme'
 
 const HeaderStyle = () => (
-  <ImageBackground
-    source={require('../../../../../assets/images/background.png')}
-    style={{ flex: 1 }}
-    resizeMode="cover"
+  <View
+    style={{ 
+      flex: 1, 
+      backgroundColor: colors.white,
+      borderBottomWidth: 1,
+      borderBottomColor: colors.black
+    }}
   />
 )
 

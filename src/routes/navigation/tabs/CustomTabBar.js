@@ -51,11 +51,11 @@ const CustomTabBar = ({ state, descriptors, navigation }) => {
   const getTabBarLabel = (routeName) => {
     switch (routeName) {
       case 'HomeTab':
-        return 'Home'
+        return '首页'
       case 'ProfileTab':
-        return 'Profile'
+        return '我的'
       default:
-        return 'Home'
+        return '首页'
     }
   }
 
@@ -97,7 +97,7 @@ const styles = StyleSheet.create({
   tabBar: {
     flexDirection: 'row',
     height: 60,
-    backgroundColor: 'white',
+    backgroundColor: colors.offWhite,
     borderTopWidth: 1,
     borderTopColor: '#e0e0e0',
     paddingBottom: 5,

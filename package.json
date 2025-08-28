@@ -1,4 +1,5 @@
 {
+  "name": "youjiao-app",
   "private": true,
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {

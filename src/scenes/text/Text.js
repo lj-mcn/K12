@@ -8,7 +8,6 @@ import {
 import { useNavigation } from '@react-navigation/native'
 import { PanGestureHandler, State } from 'react-native-gesture-handler'
 import ScreenTemplate from '../../components/ScreenTemplate'
-import DigitalAvatar from '../../components/DigitalAvatar'
 import Button from '../../components/Button'
 // import ConfigTester from '../../components/ConfigTester'
 import digitalAssistant from '../../services/assistant/DigitalAssistant'
@@ -421,20 +420,9 @@ export default function TextChat() {
 
               {/* 数字人区域 */}
               <View style={styles.avatarContainer}>
-                <DigitalAvatar
-                  style={styles.avatar}
-                  videoStyle={styles.avatarVideo}
-                  enableInteraction={false}
-                  textOnlyMode
-                  showAngryVideo={showAngryVideo}
-                  onAngryVideoEnd={handleAngryVideoEnd}
-                  showHappyVideo={showHappyVideo}
-                  onHappyVideoEnd={handleHappyVideoEnd}
-                  showSadVideo={showSadVideo}
-                  onSadVideoEnd={handleSadVideoEnd}
-                  showScaredVideo={showScaredVideo}
-                  onScaredVideoEnd={handleScaredVideoEnd}
-                />
+                <View style={[styles.avatarPlaceholder]}>
+                  <Text style={styles.avatarPlaceholderText}>🤖</Text>
+                </View>
                 <Text style={[styles.avatarStatus, { color: colorScheme.text }]}>
                   😊 点击纸团开始对话
                 </Text>
@@ -485,21 +473,9 @@ export default function TextChat() {
                     },
                   ]}
                   >
-                    <DigitalAvatar
-                      style={styles.floatingAvatarContent}
-                      videoStyle={styles.floatingAvatarVideo}
-                      onMessage={handleMessage}
-                      enableInteraction
-                      textOnlyMode
-                      showAngryVideo={showAngryVideo}
-                      onAngryVideoEnd={handleAngryVideoEnd}
-                      showHappyVideo={showHappyVideo}
-                      onHappyVideoEnd={handleHappyVideoEnd}
-                      showSadVideo={showSadVideo}
-                      onSadVideoEnd={handleSadVideoEnd}
-                      showScaredVideo={showScaredVideo}
-                      onScaredVideoEnd={handleScaredVideoEnd}
-                    />
+                    <View style={[styles.floatingAvatarPlaceholder]}>
+                      <Text style={styles.floatingAvatarPlaceholderText}>🤖</Text>
+                    </View>
                   </Animated.View>
                 </PanGestureHandler>
               </View>
@@ -666,14 +642,17 @@ const styles = StyleSheet.create({
     position: 'relative',
     marginBottom: 15,
   },
-  avatar: {
-    marginBottom: 15, // 与语音界面保持一致
-    // 移除阴影，由DigitalAvatar组件内部处理
-  },
-  avatarVideo: {
-    width: 150, // 文字界面使用更小的数字人
+  avatarPlaceholder: {
+    width: 150,
     height: 225,
     borderRadius: 15,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: colors.offWhite,
+    marginBottom: 15,
+  },
+  avatarPlaceholderText: {
+    fontSize: 60,
   },
   avatarStatus: {
     fontSize: fontSize.middle, // 与语音界面保持一致
@@ -686,14 +665,8 @@ const styles = StyleSheet.create({
     padding: 15,
     marginBottom: 5,
     marginTop: -20,
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.1,
-    shadowRadius: 3.84,
-    elevation: 3,
+    borderWidth: 1,
+    borderColor: colors.black,
   },
   chatHeader: {
     flexDirection: 'row',
@@ -719,7 +692,7 @@ const styles = StyleSheet.create({
     fontStyle: 'italic',
   },
   clearButton: {
-    color: '#ff4757',
+    color: colors.black,
     fontSize: fontSize.small,
     fontWeight: '500',
   },
@@ -822,7 +795,6 @@ const styles = StyleSheet.create({
     top: 20,
     right: 20,
     zIndex: 10000,
-    elevation: 10000, // Android阴影层级
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -832,17 +804,16 @@ const styles = StyleSheet.create({
     height: 75,
     backgroundColor: 'transparent',
   },
-  floatingAvatarContent: {
-    backgroundColor: 'transparent',
+  floatingAvatarPlaceholder: {
     width: 50,
     height: 75,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: colors.offWhite,
+    borderRadius: 10,
   },
-  floatingAvatarVideo: {
-    width: 50,
-    height: 75,
-    borderRadius: 0,
-    borderWidth: 0,
-    backgroundColor: 'transparent',
+  floatingAvatarPlaceholderText: {
+    fontSize: 20,
   },
   // 放大的对话容器
   expandedChatContainer: {
@@ -851,14 +822,8 @@ const styles = StyleSheet.create({
     padding: 15,
     marginBottom: 5,
     marginTop: 10,
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.1,
-    shadowRadius: 3.84,
-    elevation: 3,
+    borderWidth: 1,
+    borderColor: colors.black,
   },
   // 放大镜按钮样式 - 对话记录右上角
   chatMagnifyButton: {

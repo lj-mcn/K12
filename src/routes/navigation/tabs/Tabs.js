@@ -28,7 +28,7 @@ const TabNavigator = () => (
       name="HomeTab"
       component={HomeNavigator}
       options={{
-        tabBarLabel: 'Home',
+        tabBarLabel: '首页',
         tabBarIcon: ({ color, size }) => (
           <FontIcon
             name="home"
@@ -42,7 +42,7 @@ const TabNavigator = () => (
       name="ProfileTab"
       component={ProfileNavigator}
       options={{
-        tabBarLabel: 'Profile',
+        tabBarLabel: '我的',
         tabBarIcon: ({ color, size }) => (
           <FontIcon
             name="user"

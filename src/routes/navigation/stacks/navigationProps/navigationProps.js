@@ -1,13 +1,13 @@
-import { colors } from 'theme'
-
-const headerTintColor = 'white'
+const headerTintColor = '#000000'
 const fontSize = 18
-const headerMode = 'float'
+const headerMode = 'screen'
 
 const lightProps = {
   headerTintColor,
   headerStyle: {
-    backgroundColor: colors.darkPurple,
+    backgroundColor: '#ffffff',
+    borderBottomWidth: 1,
+    borderBottomColor: '#000000',
   },
   headerTitleStyle: { fontSize },
   headerMode,
@@ -16,7 +16,9 @@ const lightProps = {
 const darkProps = {
   headerTintColor,
   headerStyle: {
-    backgroundColor: colors.dark,
+    backgroundColor: '#ffffff',
+    borderBottomWidth: 1,
+    borderBottomColor: '#000000',
   },
   headerTitleStyle: { fontSize },
   headerMode,

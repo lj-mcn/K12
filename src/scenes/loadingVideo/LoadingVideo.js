@@ -1,45 +1,27 @@
-import React, { useRef, useEffect } from 'react'
-import { View, StyleSheet, Dimensions } from 'react-native'
-import { Video } from 'expo-av'
+import React, { useEffect } from 'react'
+import { View, StyleSheet, Text } from 'react-native'
 import { StatusBar } from 'expo-status-bar'
 
-const { width, height } = Dimensions.get('window')
-
 export default function LoadingVideo({ route }) {
-  const videoRef = useRef(null)
   const { onLoadingEnd } = route.params || {}
 
   useEffect(() => {
-    // 自动播放加载视频
-    if (videoRef.current) {
-      videoRef.current.playAsync()
-    }
-  }, [])
+    // 2秒后自动完成loading
+    const timer = setTimeout(() => {
+      console.log('Loading finished')
+      if (onLoadingEnd) {
+        onLoadingEnd()
+      }
+    }, 2000)
 
-  const handleVideoEnd = () => {
-    console.log('Loading video finished')
-    if (onLoadingEnd) {
-      onLoadingEnd()
-    }
-  }
+    return () => clearTimeout(timer)
+  }, [onLoadingEnd])
 
   return (
     <View style={styles.container}>
       <StatusBar hidden />
-      <Video
-        ref={videoRef}
-        style={styles.video}
-        source={require('../../../assets/images/loading.mp4')}
-        useNativeControls={false}
-        resizeMode="cover"
-        isLooping={false}
-        shouldPlay
-        onPlaybackStatusUpdate={(status) => {
-          if (status.didJustFinish) {
-            handleVideoEnd()
-          }
-        }}
-      />
+      <Text style={styles.loadingText}>幼教APP</Text>
+      <Text style={styles.subText}>正在加载中...</Text>
     </View>
   )
 }
@@ -47,12 +29,18 @@ export default function LoadingVideo({ route }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'black',
+    backgroundColor: 'white',
     justifyContent: 'center',
     alignItems: 'center',
   },
-  video: {
-    width,
-    height,
+  loadingText: {
+    fontSize: 32,
+    fontWeight: 'bold',
+    color: 'black',
+    marginBottom: 20,
+  },
+  subText: {
+    fontSize: 18,
+    color: 'black',
   },
 })
